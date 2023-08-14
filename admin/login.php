@@ -1,3 +1,12 @@
+<?php include "../include/connection.php"; 
+session_start();
+
+if(isset($_SESSION['user'])){
+  if($_SESSION['user'] == 'admin'){
+    header('location: index.php');
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +21,7 @@
 <body>
     <?php include "../header.php";?>
     <section class="vh-100 gradient-custom">
+  <form action="" method="POST">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -30,9 +40,31 @@
               <div class="form-outline form-white mb-4">
                 <input type="password" placeholder="Password" name="password" id="typePasswordX" class="form-control form-control-lg" />
               </div>
+              <?php 
+if(isset($_POST['login'])){
+  $user = $_POST['user'];
+  $senha = $_POST['password'];
+  $query = "SELECT * FROM users WHERE nome = ? AND senha = ?";
+  $stmt = $conn->prepare($query);
+  
+  $stmt->bind_param("ss", $user, $senha);
 
+  $stmt->execute();
 
-              <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    echo "Login bem-sucedido!<br><br>";
+    $_SESSION['user'] = 'admin';
+    sleep(2);
+    header('location: index.php');
+  } else {
+    echo "Login falhou. Verifique as credenciais.<br><br>";
+  }
+}
+?>
+
+              <button class="btn btn-outline-light btn-lg px-5" name="login" type="submit">Login</button>
 
              
 
@@ -43,6 +75,8 @@
       </div>
     </div>
   </div>
+</form>
+
 </section>
 </body>
 <style>
