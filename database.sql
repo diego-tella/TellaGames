@@ -14,6 +14,10 @@ create table users(
     senha VARCHAR(35) NOT NULL
 )
 
+create table sobre(
+    descricao VARCHAR(2000)
+);
+
 INSERT INTO jogos (nome, descricao, filenameimg, folder_name) VALUES ('Flappy Bird', 'Flappy bird eh um jogo top!', 'flappy.jpg', 'Flappy-Bird');
 
 INSERT INTO jogos (nome, descricao, filenameimg, folder_name) VALUES ('Snake', 'O classico jogo da cobrinha!', 'snake.png', 'Snake');
