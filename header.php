@@ -8,6 +8,13 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="http://127.0.0.1/clone/sobre.php">Sobre</a>
         <a class="nav-link active" ria-current="page" href="http://127.0.0.1/clone/admin/">Admin</a>
+        <?php
+        if(isset($_SESSION['user'])){
+          if($_SESSION['user'] == 'admin'){
+            echo '<a class="nav-link active" ria-current="page" href="http://127.0.0.1/clone/logout.php">Logout</a>';
+          }
+        }
+        ?>
 
     <form class="d-flex">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
