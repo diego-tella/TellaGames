@@ -1,17 +1,17 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="http://192.168.1.53/clone/index.php">Tella Jogos</a>
+    <a class="navbar-brand" href="http://127.0.0.1/TellaGames/index.php">Tella Jogos</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="http://127.0.0.1/clone/sobre.php">Sobre</a>
-        <a class="nav-link active" ria-current="page" href="http://127.0.0.1/clone/admin/">Admin</a>
+        <a class="nav-link active" aria-current="page" href="http://127.0.0.1/TellaGames/sobre.php">Sobre</a>
+        <a class="nav-link active" ria-current="page" href="http://127.0.0.1/TellaGames/admin/">Admin</a>
         <?php
         if(isset($_SESSION['user'])){
           if($_SESSION['user'] == 'admin'){
-            echo '<a class="nav-link active" ria-current="page" href="http://127.0.0.1/clone/logout.php">Logout</a>';
+            echo '<a class="nav-link active" ria-current="page" href="http://127.0.0.1/TellaGames/logout.php">Logout</a>';
           }
         }
         ?>
