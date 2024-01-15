@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "include/connection.php";
 ?>
 
 <!DOCTYPE html>
@@ -16,14 +17,33 @@ session_start();
     <title>Sobre</title>
 </head>
 <body class="vh-100 gradient-custom" >
-<?php include "header.php"; ?>
-<h1>Sobre</h1>
+<?php include "header.php"; ?><br>
+<h1 style="text-align:center;">About</h1>
+<center><div id="div1">
+<?php
+$query = "SELECT descricao FROM sobre";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $value = $row['descricao'];
+        echo "<h2>$value</h2>";
+    }
+
+}
+?>
+</div></center>
 </body>
 
 <style>
 h1{
     color:white;
 }
-
+h2{ color:white;}
+#div1{
+    width: 70%;
+    text-align:left;
+}
 </style>
 </html>

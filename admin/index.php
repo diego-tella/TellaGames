@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../include/verify.php";
+include "../include/connection.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,11 +27,23 @@ include "../include/verify.php";
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
+          <?php
+            $query = "SELECT descricao FROM sobre";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $value = $row['descricao'];
+                }
+            
+            }
 
+          ?>
             <div class="mb-md-5 mt-md-4 pb-5">
             <h2 style="text-align: left;">Sobre</h2>
             <div class="mb-3">
-            <textarea name="sobre" rows="7" placeholder="Editar página sobre" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea name="sobre" rows="7" placeholder="Editar página sobre" class="form-control" id="exampleFormControlTextarea1" rows="3"><?php echo $value; ?></textarea>
             </div>
 
 
@@ -38,8 +51,13 @@ include "../include/verify.php";
 
              <?php
                 if(isset($_POST['enviar'])){
-                    echo "<br><br><br>Página sobre atualizada com sucesso.";
-                }
+                  $text = $_POST['sobre'];
+                  $query = "UPDATE sobre SET descricao = ?";
+                  $stmt = $conn->prepare($query);
+                  $stmt->bind_param("s", $text);
+                  $stmt->execute();
+                  echo "<br><br><br>Página sobre atualizada com sucesso.";
+              }
              ?>
 
             </div>

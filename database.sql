@@ -12,7 +12,7 @@ create table users(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(30) NOT NULL,
     senha VARCHAR(35) NOT NULL
-)
+);
 
 create table sobre(
     descricao VARCHAR(2000)
