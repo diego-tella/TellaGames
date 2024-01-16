@@ -5,7 +5,8 @@ create table jogos(
     nome VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     filenameimg VARCHAR(255),
-    folder_name VARCHAR(30)
+    folder_name VARCHAR(30),
+    last_modifid date
 );
 
 create table users(
@@ -18,10 +19,10 @@ create table sobre(
     descricao VARCHAR(2000)
 );
 
-INSERT INTO jogos (nome, descricao, filenameimg, folder_name) VALUES ('Flappy Bird', 'Flappy bird eh um jogo top!', 'flappy.jpg', 'Flappy-Bird');
+INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('Flappy Bird', 'Flappy bird eh um jogo top!', 'flappy.jpg', 'Flappy-Bird', '2004-04-04');
 
-INSERT INTO jogos (nome, descricao, filenameimg, folder_name) VALUES ('Snake', 'O classico jogo da cobrinha!', 'snake.png', 'Snake');
+INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('Snake', 'O classico jogo da cobrinha!', 'snake.png', 'Snake', '2004-04-04');
 
-INSERT INTO jogos (nome, descricao, filenameimg, folder_name) VALUES ('Pacman', 'Comendo fantasmas desde sempre!', 'Pacman.png', 'Pacman');
+INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('Pacman', 'Comendo fantasmas desde sempre!', 'Pacman.png', 'Pacman', '2004-04-04');
 
 INSERT INTO USERS (nome, senha) VALUES ('admin', 'admin');
