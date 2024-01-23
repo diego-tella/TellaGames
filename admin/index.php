@@ -156,7 +156,7 @@ include "../include/connection.php";
               if ($conn->query($query) === TRUE) {
                 echo "A new game has been added";
               } else {
-                echo "An erros has ocurred";
+                echo "An error has happened";
               }
               }
             

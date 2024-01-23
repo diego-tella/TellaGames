@@ -41,28 +41,28 @@ if(isset($_SESSION['user'])){
                 <input type="password" placeholder="Password" name="password" id="typePasswordX" class="form-control form-control-lg" />
               </div>
               <?php 
-if(isset($_POST['login'])){
-  $user = $_POST['user'];
-  $senha = $_POST['password'];
-  $encPass = md5($senha);
-  $query = "SELECT * FROM users WHERE nome = ? AND senha = ?";
-  $stmt = $conn->prepare($query);
-  $stmt->bind_param("ss", $user, $encPass);
+                if(isset($_POST['login'])){
+                  $user = $_POST['user'];
+                  $senha = $_POST['password'];
+                  $encPass = md5($senha);
+                  $query = "SELECT * FROM users WHERE nome = ? AND senha = ?";
+                  $stmt = $conn->prepare($query);
+                  $stmt->bind_param("ss", $user, $encPass);
 
-  $stmt->execute();
+                  $stmt->execute();
 
-  $result = $stmt->get_result();
+                  $result = $stmt->get_result();
 
-  if ($result->num_rows > 0) {
-    echo "Login bem-sucedido!<br><br>";
-    $_SESSION['user'] = 'admin';
-    sleep(2);
-    header('location: index.php');
-  } else {
-    echo "Login falhou. Verifique as credenciais.<br><br>";
-  }
-}
-?>
+                  if ($result->num_rows > 0) {
+                    echo "Login bem-sucedido!<br><br>";
+                    $_SESSION['user'] = 'admin';
+                    sleep(2);
+                    header('location: index.php');
+                  } else {
+                    echo "Login falhou. Verifique as credenciais.<br><br>";
+                  }
+                }
+                ?>
 
               <button class="btn btn-outline-light btn-lg px-5" name="login" type="submit">Login</button>
 
