@@ -92,9 +92,9 @@ include "../include/connection.php";
             </div>
 
 
-              <button style="text-align: left;" class="btn btn-outline-light btn-lg px-5" name="enviar_new_game" type="submit">Create</button>
+              <button style="text-align: left;" class="btn btn-outline-light btn-lg px-5" name="enviar_new_game" type="submit">Create</button><br><br>
 
-            </div>
+            
             <?php
               if(isset($_POST['enviar_new_game'])){
                 if (!isset($_FILES["file"])) {
@@ -103,7 +103,6 @@ include "../include/connection.php";
                 $name = $_POST['name'];
                 $description = $_POST['description'];
                 $date = $_POST['date'];
-                $query = "INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('?', '?', '?', '?', '$date')";
 
                
                 //upload file (after all)
@@ -130,22 +129,30 @@ include "../include/connection.php";
                   die("File not allowed.");
               }
               
-              $filename = basename($filepath); // I'm using the original name here, but you can also change the name of the file here
+              $filename = $name; //name of the game as filename
               $extension = $allowedTypes[$filetype];
-              $targetDirectory = __DIR__ . "/images/"; // __DIR__ is the directory of the current PHP file
+              $targetDirectory = "C:\\xampp\\htdocs\\TellaGames\\images"; 
               
-              $newFilepath = $targetDirectory . "/" . $filename . "." . $extension;
-              
+              $newFilepath = $targetDirectory . "\\" . $filename . "." . $extension;
+              $localFilename = $filename . "." . $extension;
               if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
                   die("Can't move file.");
               }
               unlink($filepath); // Delete the temp file
               
-              echo "File uploaded successfully :)";
+
+              //make query here
+              $query = "INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('$name', '$description', '$localFilename', '$name', '$date');";
+
+              if ($conn->query($query) === TRUE) {
+                echo "A new game has been added";
+              } else {
+                echo "An erros has ocurred";
+              }
               }
             
             ?>
-
+          </div>
           </div>
         </div>
       </div>
