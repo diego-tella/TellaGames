@@ -104,7 +104,6 @@ include "../include/connection.php";
                 $description = $_POST['description'];
                 $date = $_POST['date'];
 
-               
                 //upload file (after all)
               
               $filepath = $_FILES['file']['tmp_name'];
@@ -134,14 +133,24 @@ include "../include/connection.php";
               $targetDirectory = "C:\\xampp\\htdocs\\TellaGames\\images"; 
               
               $newFilepath = $targetDirectory . "\\" . $filename . "." . $extension;
-              $localFilename = $filename . "." . $extension;
+              $localFilename = htmlspecialchars($filename . "." . $extension);
               if (!copy($filepath, $newFilepath)) { // Copy the file, returns false if failed
                   die("Can't move file.");
               }
               unlink($filepath); // Delete the temp file
-              
 
-              //make query here
+              $variables = array($name, $description, $localFilename);
+              $blacklist = array('select', 'SELECT', ';', '\'', '"', '#', 'FROM', 'from', '--', ')', 'SLEEP', 'or', 'OR', 'and', 'AND', '=');
+                
+                foreach ($blacklist as &$valueSQLI) {
+                  foreach($variables as &$varValues){
+                    if(str_contains($varValues, $valueSQLI)){
+                      unlink($newFilepath);
+                      die("SQL Injection Identified");
+                    }
+                  }
+                }
+              
               $query = "INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('$name', '$description', '$localFilename', '$name', '$date');";
 
               if ($conn->query($query) === TRUE) {

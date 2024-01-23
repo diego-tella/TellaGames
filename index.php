@@ -24,10 +24,12 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Exibe os dados
     while($row = $result->fetch_assoc()) {
-        $filename = $row['filenameimg'];
-        $folder = $row['folder_name'];
+        $filename = htmlspecialchars($row['filenameimg']);
+        $folder = htmlspecialchars($row['folder_name']);
+        $name = htmlspecialchars($row["nome"]);
+        $description = htmlspecialchars($row["descricao"]);
         echo "<a class='text-decoration-none' style='color:black' href='games/$folder'><img height='400' widht='400' src='images/". $filename."'><br>";
-        echo "<h2>" . $row["nome"]. "</h2><p>" . $row["descricao"]."</p></a><br><br>";
+        echo "<h2>" . $name. "</h2><p>" . $description ."</p></a><br><br>";
     }
 } else {
     echo "Nenhum resultado encontrado.";
