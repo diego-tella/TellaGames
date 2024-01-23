@@ -1,4 +1,5 @@
 <?php
+//to do: create a backgroud div in white color to insert both forms in there
 session_start();
 include "../include/verify.php";
 include "../include/connection.php";

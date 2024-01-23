@@ -18,6 +18,7 @@ create table users(
 create table sobre(
     descricao VARCHAR(2000)
 );
+INSERT INTO sobre(descricao) VALUES ('');
 
 INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('Flappy Bird', 'Flappy bird eh um jogo top!', 'flappy.jpg', 'Flappy-Bird', '2004-04-04');
 
@@ -25,4 +26,4 @@ INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALU
 
 INSERT INTO jogos (nome, descricao, filenameimg, folder_name, last_modifid) VALUES ('Pacman', 'Comendo fantasmas desde sempre!', 'Pacman.png', 'Pacman', '2004-04-04');
 
-INSERT INTO USERS (nome, senha) VALUES ('admin', 'admin');
+INSERT INTO USERS (nome, senha) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3');

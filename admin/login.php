@@ -44,10 +44,10 @@ if(isset($_SESSION['user'])){
 if(isset($_POST['login'])){
   $user = $_POST['user'];
   $senha = $_POST['password'];
+  $encPass = md5($senha);
   $query = "SELECT * FROM users WHERE nome = ? AND senha = ?";
   $stmt = $conn->prepare($query);
-  
-  $stmt->bind_param("ss", $user, $senha);
+  $stmt->bind_param("ss", $user, $encPass);
 
   $stmt->execute();
 
